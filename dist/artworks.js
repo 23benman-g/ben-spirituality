@@ -1,17 +1,7 @@
-// Replace placeholders only with your OWN artwork and writing.
-// Place your images in ./artworks/ and set image to a relative path.
-export const essentialQuestion = 'In a world full of distractions, how can we find deeper meaning through time, beauty, and human connection?';
-export const themes = [
-  {name:'Time & Presence',short:'TIME',description:'Mindfulness, meditation, gratitude, and the present moment.'},
-  {name:'Awe & Beauty',short:'AWE',description:'Wonder, nature, originality, and the small self.'},
-  {name:'Human Connection',short:'CONNECTION',description:'Dignity, relationships, kindness, and love.'}
+// Student project configuration. Replace text and images with your own original work.
+export const essentialQuestion='In a world full of distractions, how can we find deeper meaning through time, beauty, and human connection?';
+export const artworks=[
+ {id:'time',title:'TIME & PRESENCE',subtitle:'THE WEIGHT OF A MOMENT',theme:'01 / STILLNESS',image:'',creator:'Original artwork by: [your name]',description:'[Describe the original artwork you create for this theme.]',reflection:'[Write your own experience of mindfulness, gratitude, or slowing down.]',concepts:'[Add the relevant ideas from your class essays.]',connection:'[Explain in your own words how being present helps you find meaning.]'},
+ {id:'beauty',title:'AWE & BEAUTY',subtitle:'THE INFINITE WITHIN',theme:'02 / WONDER',image:'',creator:'Original artwork by: [your name]',description:'[Describe your original photograph, drawing, or sculpture.]',reflection:'[Describe a real moment when beauty made you stop and notice.]',concepts:'[Connect your own class reflections on awe, nature, and the small self.]',connection:'[Explain how beauty helps you recognize something beyond distractions.]'},
+ {id:'connection',title:'HUMAN CONNECTION',subtitle:'THE INVISIBLE THREAD',theme:'03 / BELONGING',image:'',creator:'Original artwork by: [your name]',description:'[Describe the original artwork you create about relationships.]',reflection:'[Write about a genuine experience of dignity, kindness, or connection.]',concepts:'[Connect your reflection to Departures, Star Trek, or another class topic.]',connection:'[Explain how relationships give life deeper meaning.]'}
 ];
-export const artworks = Array.from({length:9},(_,i)=>({
-  id:`art-${i+1}`,theme:Math.floor(i/3),
-  title:`Original Artwork ${i+1}`,creator:'Your name',
-  image:'', // e.g. './artworks/my-photo.jpg'
-  description:'Add your original artwork description here.',
-  reflection:'Add your own personal reflection here.',
-  concepts:'Add the class concepts you are connecting here.',
-  connection:'Explain how this work answers your essential question.'
-}));
