@@ -60,3 +60,24 @@
 .essential-question .journey-index{z-index:4}
 @media(max-width:700px){.essential-question .kinetic-line{font-size:clamp(45px,13vw,82px);height:190px}.essential-question .kinetic-b{top:90px!important}.essential-question .essential-final{font-size:clamp(25px,6vw,40px);width:89vw}}
 @media(prefers-reduced-motion:reduce){.essential-question{height:auto;min-height:80svh}.essential-question .kinetic-line{opacity:0!important}.essential-question .essential-final{opacity:1!important;filter:none!important;transform:translate(-50%,-50%)!important}}
+
+/* Meaning chapters: cohesive with Becoming's dark, blue-lit visual language */
+.meaning-kicker{font:500 .68rem/1.5 ui-monospace,SFMono-Regular,monospace;letter-spacing:.24em;color:#9bb7e0;text-transform:uppercase}
+.firework-garden{position:relative;min-height:85vh;isolation:isolate}
+.meaning-firework{position:absolute;z-index:2;left:clamp(24px,8vw,140px);bottom:clamp(32px,8vh,90px);max-width:min(530px,80vw);pointer-events:none;color:#eef4ff;text-shadow:0 2px 18px #06101c}
+.meaning-firework h2,.meaning-human h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(2.4rem,5vw,5.7rem);line-height:1.07;margin:16px 0 20px}
+.meaning-firework h2 em,.meaning-human h2 em{font-weight:400;color:#a7c8ff}
+.meaning-firework p,.meaning-human p{font-size:clamp(.95rem,1.3vw,1.12rem);line-height:1.8;color:#bdcbe0;max-width:47ch}
+.meaning-hint{display:block;margin-top:22px;font:500 .66rem/1.5 ui-monospace,monospace;letter-spacing:.15em;color:#c1d9ff}
+.meaning-human{position:relative;min-height:95vh;display:flex;align-items:center;overflow:hidden;padding:clamp(70px,12vw,170px) clamp(25px,10vw,170px);background:radial-gradient(ellipse at 78% 52%,#152d4b 0%,#0b192b 38%,#070e19 75%);color:#edf4ff;isolation:isolate}
+.meaning-human-inner{position:relative;z-index:2;max-width:640px}
+.meaning-human .meaning-reflection-note{font-size:.82rem;color:#91a5c0;border-left:1px solid #6b95ce;padding-left:18px;margin-top:32px}
+.meaning-human a{display:inline-flex;gap:22px;margin-top:32px;color:#d6e7ff;text-decoration:none;border-bottom:1px solid #6e93c4;padding-bottom:9px;font:.72rem ui-monospace,monospace;letter-spacing:.12em}
+.meaning-network{position:absolute;right:4%;top:15%;width:min(46vw,620px);aspect-ratio:1;opacity:.65;animation:network-breathe 7s ease-in-out infinite alternate}
+.network-orb{position:absolute;width:12px;height:12px;border-radius:50%;background:#c7dcff;box-shadow:0 0 18px 7px #679fe777}
+.orb-a{top:15%;left:45%}.orb-b{top:43%;left:12%}.orb-c{top:75%;left:64%}.orb-d{top:36%;left:83%}
+.network-line{position:absolute;height:1px;background:linear-gradient(90deg,#7ca8ec33,#bcd7ffbb,#7ca8ec33);transform-origin:left center}
+.line-a{top:16%;left:46%;width:44%;transform:rotate(28deg)}.line-b{top:44%;left:13%;width:44%;transform:rotate(-39deg)}.line-c{top:44%;left:13%;width:68%;transform:rotate(24deg)}.line-d{top:37%;left:84%;width:45%;transform:rotate(121deg)}
+@keyframes network-breathe{from{transform:scale(.97) rotate(-3deg);opacity:.4}to{transform:scale(1.04) rotate(3deg);opacity:.8}}
+@media(max-width:700px){.meaning-firework{bottom:24px;left:24px;max-width:calc(100% - 48px)}.meaning-firework h2{font-size:2rem}.meaning-firework p{font-size:.86rem;line-height:1.5}.meaning-human{min-height:85vh}.meaning-network{width:70vw;right:-20%;opacity:.23}}
+@media(prefers-reduced-motion:reduce){.meaning-network{animation:none}}
