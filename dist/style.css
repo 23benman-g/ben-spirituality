@@ -45,3 +45,18 @@
 /* Keep theme selection alongside the writing, below the artwork. */
 @media(min-width:901px){#chapters .chapter-layout{align-items:start}#chapters .chapter-tabs{position:sticky;align-self:start;top:clamp(100px,calc(50svh - 150px),300px);margin-top:clamp(240px,30svh,340px)}}
 @media(max-width:900px){#chapters .chapter-tabs{position:sticky;top:0;z-index:5;align-self:start;background:#14181ef5;backdrop-filter:blur(12px);margin-top:0;padding-top:6px;padding-bottom:6px}}
+
+/* Essential question: a single scroll-driven typographic transformation. */
+.essential-question{height:230svh;min-height:1200px;overflow:clip!important;background:radial-gradient(ellipse at 50% 48%,#172638 0%,#111923 43%,#10161e 80%)}
+.essential-question .word-pin{overflow:hidden!important;isolation:isolate}
+.essential-question .kinetic-line{z-index:2;pointer-events:none;transform:translateY(calc(var(--eq-progress,0)*-36px));opacity:calc(1 - var(--eq-heading-fade,0));filter:blur(calc(var(--eq-heading-fade,0)*5px));transition:none}
+.essential-question .kinetic-a,.essential-question .kinetic-b{transform:translateX(-50%) rotate(0deg)!important;left:50%!important}
+.essential-question .kinetic-line{font-size:clamp(64px,11vw,155px);height:clamp(190px,29vw,305px);letter-spacing:-.055em}
+.essential-question .kinetic-a{top:0!important}
+.essential-question .kinetic-b{top:clamp(90px,13vw,150px)!important}
+.essential-question .essential-final{z-index:3;position:absolute;left:50%;top:50%;width:min(900px,86vw);margin:0!important;transform:translate(-50%,-43%) translateY(calc((1 - var(--eq-reveal,0))*30px));text-align:center;font:normal clamp(26px,4.1vw,59px)/1.26 'Italiana',Georgia,serif;letter-spacing:-.025em;color:#e0eaf5;opacity:var(--eq-reveal,0)!important;filter:blur(calc((1 - var(--eq-reveal,0))*8px));text-wrap:balance;pointer-events:none}
+.essential-question .essential-final em{font-style:italic;color:#a7c8ed}
+.essential-question .eq-drip-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.essential-question .journey-index{z-index:4}
+@media(max-width:700px){.essential-question .kinetic-line{font-size:clamp(45px,13vw,82px);height:190px}.essential-question .kinetic-b{top:90px!important}.essential-question .essential-final{font-size:clamp(25px,6vw,40px);width:89vw}}
+@media(prefers-reduced-motion:reduce){.essential-question{height:auto;min-height:80svh}.essential-question .kinetic-line{opacity:0!important}.essential-question .essential-final{opacity:1!important;filter:none!important;transform:translate(-50%,-50%)!important}}
