@@ -81,3 +81,15 @@
 @keyframes network-breathe{from{transform:scale(.97) rotate(-3deg);opacity:.4}to{transform:scale(1.04) rotate(3deg);opacity:.8}}
 @media(max-width:700px){.meaning-firework{bottom:24px;left:24px;max-width:calc(100% - 48px)}.meaning-firework h2{font-size:2rem}.meaning-firework p{font-size:.86rem;line-height:1.5}.meaning-human{min-height:85vh}.meaning-network{width:70vw;right:-20%;opacity:.23}}
 @media(prefers-reduced-motion:reduce){.meaning-network{animation:none}}
+
+/* Three-theme selector and redundant click-to-explode page retired; DOM retained for compatibility with existing scripts. */
+.retired-section{display:none!important}
+/* Beauty and living garden are now one continuous section. */
+.particle-garden{background:radial-gradient(ellipse at 50% 55%,rgba(28,62,95,.34),transparent 67%),#09121f;border-top:1px solid rgba(139,181,232,.18);padding-top:clamp(65px,9vw,125px)}
+.particle-garden .garden-heading{max-width:850px;margin:0 auto;text-align:center;pointer-events:auto}
+.particle-garden .garden-heading h2{color:#eaf3ff;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(2.6rem,5.4vw,5.8rem);letter-spacing:-.045em;line-height:1.1}
+.particle-garden .garden-heading h2 em{color:#a7c8ff}
+.garden-meaning{color:#bdcbe0;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.85;max-width:650px;margin:16px auto 0}
+.particle-garden .eyebrow{color:#8fb9ed}
+.particle-garden #particleGarden{margin-top:-20px}
+@media(max-width:700px){.particle-garden .garden-heading{padding:0 6px}.particle-garden #particleGarden{margin-top:0}}
