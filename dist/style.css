@@ -93,3 +93,12 @@
 .particle-garden .eyebrow{color:#8fb9ed}
 .particle-garden #particleGarden{margin-top:-20px}
 @media(max-width:700px){.particle-garden .garden-heading{padding:0 6px}.particle-garden #particleGarden{margin-top:0}}
+
+/* Beauty + interactive garden: single unified section, no duplicate C sculpture */
+.arrival#garden{display:grid!important;grid-template-columns:minmax(260px,.78fr) minmax(0,1.22fr)!important;gap:clamp(20px,4vw,72px)!important;align-items:center!important;min-height:100vh;padding:clamp(80px,10vw,145px) clamp(24px,7vw,120px)!important;overflow:hidden}
+.arrival#garden .arrival-copy{position:relative;z-index:2;max-width:560px}
+.arrival#garden .garden-in-beauty{min-width:0;width:100%;height:auto;min-height:520px;padding:0!important;margin:0!important;background:transparent!important;border:0!important;display:flex!important;flex-direction:column;justify-content:center;overflow:visible}
+.arrival#garden .garden-in-beauty #particleGarden{display:block;width:100%!important;height:clamp(360px,44vw,590px)!important;min-height:340px;touch-action:pan-y}
+.arrival#garden .garden-in-beauty .garden-caption{padding:12px 4px!important;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.arrival#garden .garden-in-beauty .garden-plants{padding:8px 0 0!important}
+@media(max-width:850px){.arrival#garden{grid-template-columns:1fr!important;gap:10px!important;padding:100px 22px 75px!important}.arrival#garden .garden-in-beauty{min-height:400px}.arrival#garden .garden-in-beauty #particleGarden{height:420px!important}}
