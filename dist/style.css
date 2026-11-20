@@ -114,3 +114,9 @@
 .connection-hint{position:absolute;bottom:9%;left:50%;transform:translateX(-50%);font:10px/1.5 ui-monospace,monospace;letter-spacing:.2em;color:#9fb9d4;white-space:nowrap;pointer-events:none}
 .meaning-human-particles .meaning-reflection-note{font-size:.87rem;opacity:.85}
 @media(max-width:850px){.meaning-human-particles{grid-template-columns:1fr;min-height:auto}.meaning-human-particles .meaning-human-inner{padding:64px 7vw 0!important}.meaning-human-particles .connection-stage{min-height:380px;height:55svh}.meaning-human-particles h2{font-size:clamp(3.2rem,12vw,5.7rem)!important}}
+
+/* Floating 360-degree human-connection sculpture */
+.meaning-human-particles .connection-stage{touch-action:none;overflow:hidden}
+#connection-canvas{touch-action:none;cursor:grab}
+#connection-canvas:active{cursor:grabbing}
+.meaning-human-particles .connection-stage:before{content:"";position:absolute;inset:9% 3%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(37,94,164,.13),transparent 67%)}
