@@ -102,3 +102,15 @@
 .arrival#garden .garden-in-beauty .garden-caption{padding:12px 4px!important;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 .arrival#garden .garden-in-beauty .garden-plants{padding:8px 0 0!important}
 @media(max-width:850px){.arrival#garden{grid-template-columns:1fr!important;gap:10px!important;padding:100px 22px 75px!important}.arrival#garden .garden-in-beauty{min-height:400px}.arrival#garden .garden-in-beauty #particleGarden{height:420px!important}}
+
+/* Human Connection: immersive particle figures */
+.meaning-human-particles{min-height: min(900px,100svh);display:grid!important;grid-template-columns:minmax(310px,.84fr) minmax(0,1.3fr);align-items:center;gap:0;overflow:hidden;position:relative;background:radial-gradient(ellipse at 76% 49%,#102744 0%,#071322 46%,#060d17 100%)}
+.meaning-human-particles .meaning-human-inner{position:relative;z-index:2;max-width:620px;padding:clamp(28px,5vw,92px)!important;margin:0!important}
+.meaning-human-particles h2{font-size:clamp(3.5rem,6.4vw,7rem)!important;line-height:1.02;letter-spacing:-.045em;white-space:normal}
+.meaning-human-particles h2 em{color:#a9caff;font-weight:400}
+.meaning-human-particles .connection-stage{height:min(760px,90svh);min-height:470px;position:relative;touch-action:pan-y;cursor:grab;z-index:1}
+.meaning-human-particles .connection-stage:active{cursor:grabbing}
+#connection-canvas{width:100%;height:100%;display:block;touch-action:pan-y}
+.connection-hint{position:absolute;bottom:9%;left:50%;transform:translateX(-50%);font:10px/1.5 ui-monospace,monospace;letter-spacing:.2em;color:#9fb9d4;white-space:nowrap;pointer-events:none}
+.meaning-human-particles .meaning-reflection-note{font-size:.87rem;opacity:.85}
+@media(max-width:850px){.meaning-human-particles{grid-template-columns:1fr;min-height:auto}.meaning-human-particles .meaning-human-inner{padding:64px 7vw 0!important}.meaning-human-particles .connection-stage{min-height:380px;height:55svh}.meaning-human-particles h2{font-size:clamp(3.2rem,12vw,5.7rem)!important}}
