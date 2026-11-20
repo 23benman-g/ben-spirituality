@@ -9,29 +9,42 @@ const P=(x,y,z,side,type=0,s=1)=>particles.push({x,y,z,side,type,s,phase:rr(0,6.
 function blob(cx,cy,cz,rx,ry,rz,n,side){for(let i=0;i<n;i++){let a=rr(0,6.283),u=rr(-1,1),r=Math.sqrt(1-u*u),shell=rr(.66,1);P(cx+rx*r*Math.cos(a)*shell,cy+ry*u*shell,cz+rz*r*Math.sin(a)*shell,side,0,rr(.6,1.4))}}
 function tube(a,b,r,n,side){let dx=b[0]-a[0],dy=b[1]-a[1],dz=b[2]-a[2],len=Math.hypot(dx,dy,dz)||1;let ux=-dy/len,uy=dx/len,uz=0;let vx=uy*dz/len,vyy=uz*dx/len-ux*dz/len,vz=ux*dy/len-uy*dx/len;for(let i=0;i<n;i++){let q=rnd(),theta=rr(0,6.283),rad=r*Math.sqrt(rnd())*(.82+.12*Math.sin(q*Math.PI));P(a[0]+dx*q+rad*(ux*Math.cos(theta)+vx*Math.sin(theta)),a[1]+dy*q+rad*(uy*Math.cos(theta)+vyy*Math.sin(theta)),a[2]+dz*q+rad*(uz*Math.cos(theta)+vz*Math.sin(theta)),side,0,rr(.7,1.5))}}
 function curve(a,b,c,r,n,side){const steps=14;for(let j=0;j<steps;j++){const q=j/steps,k=(j+1)/steps;const at=u=>[(1-u)*(1-u)*a[0]+2*(1-u)*u*b[0]+u*u*c[0],(1-u)*(1-u)*a[1]+2*(1-u)*u*b[1]+u*u*c[1],(1-u)*(1-u)*a[2]+2*(1-u)*u*b[2]+u*u*c[2]];tube(at(q),at(k),r*(.85+.15*Math.sin(q*Math.PI)),Math.ceil(n/steps),side)}}
-function human(side){const mirror=side===0?-1:1, x=a=>mirror*a;const lean=side===0?-.12:.10;
-// Horizontal floating bodies, reaching in toward the shared light.
-blob(x(1.23),-.19,0,.32,.27,.23,650,side); // torso
-blob(x(1.48),-.22,.02,.23,.21,.21,380,side); // hips
-blob(x(1.02),-.48,-.04,.145,.17,.15,340,side); // head
-curve([x(1.11),-.39,-.03],[x(1.14),-.31,0],[x(1.23),-.26,0],.082,140,side); // neck
-// Backward drifting legs: both legs bend and taper in zero gravity.
-curve([x(1.55),-.31,.04],[x(1.78),-.58,.18],[x(2.03),-.78,.32],.135,460,side);
-curve([x(2.03),-.78,.32],[x(2.15),-.89,.40],[x(2.28),-.77,.49],.085,270,side);
-curve([x(1.53),-.11,-.06],[x(1.78),.15,-.24],[x(2.01),.34,-.30],.13,440,side);
-curve([x(2.01),.34,-.30],[x(2.18),.38,-.25],[x(2.31),.23,-.18],.078,260,side);
-// The main arm arcs toward the center; detailed hand and individual fingers.
-curve([x(1.13),-.26,.06],[x(.77),-.36,.12],[x(.45),-.26,.19],.112,460,side);
-curve([x(.45),-.26,.19],[x(.32),-.24,.23],[x(.19),-.22,.24],.068,310,side);
-blob(x(.17),-.22,.24,.095,.048,.055,115,side);
-for(let k=0;k<4;k++){const yy=-.265+k*.024;curve([x(.13),yy,.24],[x(.075),yy-.006,.25],[x(.025),yy+(k-1.5)*.007,.25],.012,72,side)}
-// The second arm trails behind and balances the composition.
-curve([x(1.28),-.11,-.08],[x(1.48),.10,-.23],[x(1.76),.02,-.29],.098,400,side);
-curve([x(1.76),.02,-.29],[x(1.93),-.04,-.25],[x(2.05),.09,-.15],.058,240,side);
-// Long luminous hair filaments, flowing backward from the head.
-for(let j=0;j<9;j++){let a=j/8,ox=rr(-.08,.08),oy=rr(-.12,.12);for(let k=0;k<55;k++){let u=k/54;P(x(1.08+ox+u*(.48+.25*a)),-.53+oy+Math.sin(u*4+a*4)*.075+u*(a-.5)*.30,-.06+u*.09,side,2,rr(.4,.85))}}
-// Curved ribbons that extend beyond the bodies and feel weightless.
-for(let j=0;j<11;j++){let phase=j*.74;for(let k=0;k<105;k++){let u=k/104,xx=1.15+u*1.30+.13*Math.sin(u*8+phase),yy=-.16+Math.sin(u*6.5+phase)*(.24+.42*u),zz=.25+Math.cos(u*6+phase)*(.17+.25*u);streamers.push({x:x(xx),y:yy,z:zz,side,phase:phase+u*7,s:rr(.3,.85)})}}
+function human(side){
+// Anatomical landmarks are modeled in a local upright coordinate system,
+// then tilted into a weightless diagonal pose. Both bodies retain their shape in 360°.
+const mirror=side===0?-1:1;
+const tr=([u,v,z])=>[mirror*(1.38+u*.89+v*.24),-.20+v*.84-u*.13,z];
+const B=(u,v,z,rx,ry,rz,n)=>{let c=tr([u,v,z]);blob(...c,rx,ry,rz,n,side)};
+const T=(a,b,r,n)=>tube(tr(a),tr(b),r,n,side);
+const C=(a,b,c,r,n)=>curve(tr(a),tr(b),tr(c),r,n,side);
+// Head, jaw, neck, shoulders, rib cage, waist, and pelvis.
+B(0,-.71,0,.165,.205,.165,700);
+B(0,-.39,0,.09,.105,.095,180);
+B(0,-.05,0,.295,.36,.18,1100);
+B(0,.28,0,.20,.19,.155,400);
+B(0,.45,0,.26,.16,.18,520);
+// A luminous spine and visible shoulders make the anatomy readable from behind.
+C([0,-.34,-.13],[0,-.02,-.15],[0,.38,-.10],.045,210);
+T([-.26,-.30,0],[.26,-.30,0],.075,260);
+// Reaching arm, elbow, wrist, palm, individual slender fingers.
+C([-.26,-.29,0],[-.56,-.31,.05],[-.80,-.29,.12],.105,500);
+C([-.80,-.29,.12],[-.98,-.28,.18],[-1.14,-.24,.20],.069,360);
+B(-1.18,-.24,.20,.085,.047,.05,150);
+for(let j=0;j<5;j++){let v=-.285+j*.022;C([-1.22,v,.20],[-1.29,v-.01,.21],[-1.36,v+(j-2)*.006,.22],.012,75)}
+// The opposite arm floats backward with a distinct elbow and hand.
+C([.25,-.28,-.03],[.45,-.04,-.18],[.66,.04,-.18],.098,380);
+C([.66,.04,-.18],[.79,.19,-.12],[.88,.25,-.04],.063,290);
+B(.89,.26,-.04,.065,.045,.045,85);
+// Two separate articulated legs, with bent knees and pointed feet.
+C([-.13,.50,.02],[-.22,.77,.08],[-.33,1.03,.15],.14,540);
+C([-.33,1.03,.15],[-.40,1.22,.19],[-.49,1.36,.21],.085,370);
+C([.14,.50,-.03],[.26,.72,-.18],[.42,.88,-.25],.14,540);
+C([.42,.88,-.25],[.51,1.08,-.24],[.60,1.23,-.19],.085,370);
+B(-.51,1.38,.21,.115,.048,.065,110);B(.63,1.25,-.19,.115,.048,.065,110);
+// Hair and long fine energy strands stream away from the floating head.
+for(let j=0;j<18;j++){let offset=(j-8.5)*.017,depth=rr(-.13,.13);for(let k=0;k<65;k++){let q=k/64,pt=tr([.07+q*(.22+j*.007),-.78-q*.26+Math.sin(q*5+j*.4)*.035+offset,depth+q*.08]);P(...pt,side,2,rr(.4,.8))}}
+// Atmospheric ribbons follow the body rather than obscuring its silhouette.
+for(let j=0;j<13;j++){let ph=j*.63;for(let k=0;k<90;k++){let q=k/89,pt=tr([.18+q*(.5+.3*Math.sin(ph)), -.6+q*1.9+.13*Math.sin(q*9+ph),.24+.20*Math.cos(q*7+ph)]);streamers.push({x:pt[0],y:pt[1],z:pt[2],side,phase:ph+q*7,s:rr(.25,.75)})}}
 }
 human(0);human(1);
 const sparks=Array.from({length:110},(_,i)=>({a:i*2.39996,r:Math.sqrt(rnd()),z:rr(-.2,.2),s:rr(.6,1.5)}));
