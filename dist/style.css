@@ -121,12 +121,11 @@
 #connection-canvas:active{cursor:grabbing}
 .meaning-human-particles .connection-stage:before{content:"";position:absolute;inset:9% 3%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(37,94,164,.13),transparent 67%)}
 
-/* Exact static Human Connection artwork, replacing the draggable figures. */
-#human-connection.human-static-art { display:block; width:100%; height:auto; min-height:0; margin:0; padding:0; overflow:hidden; background:#06101e; }
-#human-connection.human-static-art img { display:block; width:100%; height:auto; margin:0; padding:0; }
-
-/* Depth interaction only: exact source image and colors are unchanged. */
-#human-connection.human-static-art { perspective:1500px; touch-action:pan-y; cursor:grab; }
-#human-connection.human-static-art.is-dragging { cursor:grabbing; touch-action:none; }
-#human-connection.human-static-art img { transform-origin:center center; backface-visibility:hidden; will-change:transform; user-select:none; -webkit-user-drag:none; pointer-events:none; }
-@media(prefers-reduced-motion:reduce){#human-connection.human-static-art img{transform:none!important;will-change:auto}}
+/* Reserved full-height sections for the Time & Presence chapter. */
+.time-extra{position:relative;background:#101318;border-top:1px solid #ffffff20}
+.time-extra-panel{position:relative;min-height:95svh;padding:clamp(85px,12vh,150px) clamp(30px,9vw,150px);border-bottom:1px solid #ffffff20;background:radial-gradient(ellipse at 80% 45%,#263b591a,transparent 55%);}
+.time-extra-kicker{font:9px monospace;letter-spacing:2.2px;color:#92a9cb}
+.time-extra-panel h2{font-family:'Italiana',Georgia,serif;font-size:clamp(54px,7vw,105px);font-weight:400;letter-spacing:-2px;line-height:1.12;margin:34px 0;color:#e6e4db}
+.time-extra-panel h2 em{color:#bac6d9;font-family:Georgia,serif;font-weight:400}
+.time-extra-space{min-height:45svh}
+@media(max-width:900px){.time-extra-panel{min-height:90svh;padding:90px 7%}.time-extra-space{min-height:45svh}}
