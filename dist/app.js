@@ -5,6 +5,47 @@ for(let i=0;i<N;i++){const u=i/N,t=u*Math.PI*2;const band=i%12,v=band/12*Math.PI
 const a=(Math.floor(i/12)/200)*Math.PI*1.72+.42,r=1.02+.12*Math.cos(v);targets[1].push([r*Math.cos(a),r*Math.sin(a),.18*Math.sin(v)]);
 const r2=.2+1.12*u,sp=t*5,yy=.14*Math.sin(r2*12);targets[2].push([r2*Math.cos(sp),yy+(rand(i+40)-.5)*.07,r2*Math.sin(sp)]);
 let yf=(u-.5)*2.4,ph=i*2.39996323,rf=.65*Math.pow(Math.sin(Math.PI*u),.8)*(1-.36*u),xx=rf*Math.cos(ph);targets[3].push([xx+.19*Math.sin(u*5),yf,rf*Math.sin(ph)]);points.push({x:targets[0][i][0],y:targets[0][i][1],z:targets[0][i][2],size:.6+rand(i+32)*1.25,color:rand(i+7)})}
+// TIME & PRESENCE: sculptural 3D clock made from the existing 2,400 particles.
+// All four legacy morph targets now resolve to this clock, so scrolling cannot
+// turn it back into the unrelated Identity/Doubt/Service sculptures.
+function clockParticle(i){
+  const q=rand(i+811), v=rand(i+1973), a=q*Math.PI*2;
+  const polar=(r,z)=>[Math.cos(a)*r,Math.sin(a)*r,z];
+  let pos;
+  if(i<1120){ // layered, deep clock rim: front, side and back
+    const layer=i%5;
+    const r=layer===0?1.18:layer===1?1.25:layer===2?1.31:layer===3?1.19:1.28;
+    const z=layer===0?.19:layer===1?.14:layer===2?-.04:layer===3?-.23:-.22;
+    pos=polar(r+(v-.5)*.018,z+(rand(i+55)-.5)*.028);
+  }else if(i<1550){ // twelve luminous hour markers, inlaid into dial
+    const k=i-1120,h=Math.floor(k/36)%12,t=h*Math.PI/6-Math.PI/2;
+    const radial=1.03+(rand(i+6)-.5)*.065;
+    pos=[Math.cos(t)*radial+(q-.5)*.027,Math.sin(t)*radial+(v-.5)*.027,.23];
+  }else if(i<1800){ // concentric rings give the dial real depth
+    const r=i%2?.79:.91;
+    pos=polar(r,.13+(v-.5)*.024);
+  }else if(i<2020){ // long minute hand, set to ten past ten
+    const t=Math.PI/3, r=.12+q*.85;
+    pos=[Math.sin(t)*r+(v-.5)*.043,Math.cos(t)*r+(rand(i+4)-.5)*.043,.31+(rand(i+7)-.5)*.035];
+  }else if(i<2230){ // short hour hand, pointing to ten
+    const t=-Math.PI/3,r=.09+q*.57;
+    pos=[Math.sin(t)*r+(v-.5)*.053,Math.cos(t)*r+(rand(i+4)-.5)*.053,.35+(rand(i+7)-.5)*.045];
+  }else if(i<2320){ // center pin
+    const r=Math.sqrt(q)*.092;
+    pos=[Math.cos(a)*r,Math.sin(a)*r,.39+(v-.5)*.05];
+  }else{ // subtle interior floating dust
+    const r=Math.sqrt(q)*1.05;
+    pos=[Math.cos(a)*r,Math.sin(a)*r,-.11+v*.17];
+  }
+  return pos;
+}
+for(let i=0;i<N;i++){
+  const p=clockParticle(i);
+  for(let f=0;f<targets.length;f++)targets[f][i]=p.slice();
+  points[i].x=p[0];points[i].y=p[1];points[i].z=p[2];
+  points[i].size=.46+rand(i+32)*.67;
+  points[i].color=(i>=1800&&i<2320)? .89+rand(i+7)*.1 : rand(i+7)*.78;
+}
 function resize(){let r=canvas.getBoundingClientRect();w=r.width;h=r.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}window.addEventListener('resize',resize);resize();const starfield=Array.from({length:60},(_,i)=>({x:rand(i+200),y:rand(i+500),a:rand(i+700)}));function project(x,y,z,scale){let cy=Math.cos(angle),sy=Math.sin(angle),ct=Math.cos(tilt),st=Math.sin(tilt),xx=x*cy+z*sy,zz=-x*sy+z*cy,yy=y*ct-zz*st;zz=y*st+zz*ct;let perspective=3.8/(3.8+zz);return {x:w*.49+xx*scale*perspective,y:h*.47-yy*scale*perspective,z:zz,p:perspective}}function frame(){tick++;ctx.clearRect(0,0,w,h);const sc=Math.min(w*.32,h*.29)*zoom;starfield.forEach((s,i)=>{ctx.fillStyle=`rgba(157,181,217,${.12+s.a*.2})`;ctx.fillRect(s.x*w,s.y*h,1,1)});if(!paused&&!drag)angle+=.0016;let easing=reduced?1:.045;const projected=[];for(let i=0;i<N;i++){let p=points[i],tar=targets[targetForm][i];p.x+=(tar[0]-p.x)*easing;p.y+=(tar[1]-p.y)*easing;p.z+=(tar[2]-p.z)*easing;let a=project(p.x,p.y,p.z,sc);a.i=i;projected.push(a)}projected.sort((a,b)=>b.z-a.z);ctx.save();ctx.strokeStyle='#9fb9e00e';ctx.lineWidth=.7;for(let ring=0;ring<4;ring++){ctx.beginPath();for(let j=0;j<=100;j++){let a=j/100*Math.PI*2,rr=.8+ring*.3,p=project(Math.cos(a)*rr,-1.6,Math.sin(a)*rr,sc);j?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)}ctx.stroke()}ctx.restore();for(const p of projected){let o=points[p.i],alpha=Math.max(.15,Math.min(1,(1.65-p.z)*.48)),b=o.color>.86;ctx.fillStyle=b?`rgba(230,220,195,${alpha})`:`rgba(${137+Math.floor(o.color*45)},${164+Math.floor(o.color*40)},${205+Math.floor(o.color*35)},${alpha})`;ctx.beginPath();ctx.arc(p.x,p.y,Math.max(.35,o.size*p.p*.76),0,Math.PI*2);ctx.fill();if(o.color>.993){let glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,9);glow.addColorStop(0,'#d2e7ff66');glow.addColorStop(1,'#93b8ff00');ctx.fillStyle=glow;ctx.fillRect(p.x-9,p.y-9,18,18)}}
 ctx.strokeStyle='#96b3df16';ctx.lineWidth=.6;ctx.beginPath();ctx.ellipse(w*.49,h*.47,sc*1.57,sc*1.57,0,0,Math.PI*2);ctx.stroke();if(!document.hidden)requestAnimationFrame(frame);else setTimeout(()=>requestAnimationFrame(frame),250)}requestAnimationFrame(frame);
 $('#reset').onclick=()=>{angle=.45;tilt=-.24;zoom=1};canvas.onpointerdown=e=>{drag=true;manualTheme=true;lastX=e.clientX;lastY=e.clientY;canvas.classList.add('dragging');canvas.setPointerCapture(e.pointerId)};canvas.onpointermove=e=>{if(drag){angle+=(e.clientX-lastX)*.008;tilt=Math.max(-1.3,Math.min(1.3,tilt+(e.clientY-lastY)*.008));lastX=e.clientX;lastY=e.clientY}};function endDrag(){drag=false;canvas.classList.remove('dragging')}canvas.onpointerup=endDrag;canvas.onpointercancel=endDrag;canvas.onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','0'].includes(e.key)){e.preventDefault();if(e.key==='ArrowLeft')angle-=.12;if(e.key==='ArrowRight')angle+=.12;if(e.key==='ArrowUp')tilt=Math.min(1.3,tilt+.12);if(e.key==='ArrowDown')tilt=Math.max(-1.3,tilt-.12);if(e.key==='0')$('#reset').click();}};
