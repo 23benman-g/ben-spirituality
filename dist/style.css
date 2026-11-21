@@ -121,11 +121,6 @@
 #connection-canvas:active{cursor:grabbing}
 .meaning-human-particles .connection-stage:before{content:"";position:absolute;inset:9% 3%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(37,94,164,.13),transparent 67%)}
 
-/* Human Connection: cosmic backdrop and luminous floating bodies */
-.meaning-human-particles{background:#050d1a!important}
-.meaning-human-particles::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,#050e1bf2 0%,#06101ecb 32%,#06111e45 64%,#06101e50 100%),url("assets/connection-galaxy.webp");background-size:cover;background-position:54% 50%;opacity:.92;pointer-events:none;z-index:0}
-.meaning-human-particles::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 72% 47%,transparent 0%,#06101b22 60%,#050c18bb 100%);pointer-events:none;z-index:0}
-.meaning-human-particles .connection-stage{z-index:1}
-.meaning-human-particles .meaning-human-inner{z-index:2}
-.meaning-human-particles .connection-stage:before{display:none}
-@media(max-width:850px){.meaning-human-particles::before{background-position:60% center;opacity:.70}}
+/* Exact static Human Connection artwork, replacing the draggable figures. */
+#human-connection.human-static-art { display:block; width:100%; height:auto; min-height:0; margin:0; padding:0; overflow:hidden; background:#06101e; }
+#human-connection.human-static-art img { display:block; width:100%; height:auto; margin:0; padding:0; }
