@@ -186,3 +186,74 @@
   .site-nav a,.site-nav button{font-size:9px}
   .site-nav{gap:18px}
 }
+
+
+/* Conclusion: minimalist horizontal particle constellation. */
+.conclusion-stream{
+  isolation:isolate;
+  position:relative;
+  width:100%;
+  min-height:100svh;
+  overflow:hidden;
+  background:radial-gradient(ellipse 69% 60% at 50% 52%,#0c1c2c 0%,#081522 60%,#07111e 100%);
+  color:#ebe9e4;
+  border-top:1px solid rgba(232,237,245,.09);
+  scroll-margin-top:0;
+  display:grid;
+  place-items:center;
+}
+.conclusion-stream-inner{
+  width:min(100%,1400px);
+  padding:clamp(90px,12vh,142px) clamp(20px,4vw,65px) clamp(95px,13vh,148px);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.conclusion-stream h2{
+  font-family:'Italiana',Georgia,'Times New Roman',serif;
+  font-style:italic;
+  color:#e8e5e0;
+  font-weight:400;
+  font-size:clamp(74px,8.4vw,124px);
+  letter-spacing:-.03em;
+  line-height:1.12;
+  margin:0 auto clamp(12px,2.5vh,28px);
+}
+.conclusion-stream-art{
+  width:min(100%,1220px);
+  height:clamp(190px,28vh,310px);
+  position:relative;
+  margin:0 auto;
+}
+.conclusion-stream-art canvas{
+  position:relative!important;
+  inset:auto!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  cursor:crosshair!important;
+  touch-action:pan-y!important;
+  outline-offset:-5px;
+}
+.conclusion-writing-space{
+  width:min(100%,870px);
+  min-height:clamp(145px,21vh,230px);
+  margin:clamp(10px,3vh,27px) auto clamp(18px,3vh,30px);
+  border-left:1px solid rgba(166,194,224,.2);
+  background:linear-gradient(90deg,rgba(116,159,205,.022),transparent 52%);
+}
+.conclusion-stream-rule{
+  width:94px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(198,161,116,.83),transparent);
+}
+.conclusion-stream .conclusion-stream-art{flex-shrink:0;}
+.site-nav a[href="#conclusion"]{white-space:nowrap}
+@media(max-width:760px){
+ .conclusion-stream-inner{padding:90px 6vw 115px}
+ .conclusion-stream h2{font-size:clamp(60px,14vw,94px)}
+ .conclusion-stream-art{height:225px}
+ .conclusion-writing-space{min-height:175px}
+}
