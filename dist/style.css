@@ -129,3 +129,18 @@
 .time-extra-panel h2 em{color:#bac6d9;font-family:Georgia,serif;font-weight:400}
 .time-extra-space{min-height:45svh}
 @media(max-width:900px){.time-extra-panel{min-height:90svh;padding:90px 7%}.time-extra-space{min-height:45svh}}
+
+/* Minimal three-chapter exhibition: title, blank writing space and original artwork. */
+.hero{min-height:105svh!important;height:auto!important;display:grid!important;grid-template-columns:minmax(260px,.83fr) minmax(0,1.17fr);align-items:center;gap:clamp(16px,4vw,65px);padding:clamp(100px,11vh,155px) clamp(25px,7vw,115px)!important;}
+.hero .hero-copy{position:relative!important;max-width:600px;}
+.hero .artwrap{position:relative!important;inset:auto!important;transform:none!important;width:100%!important;height:clamp(390px,48vw,670px)!important;}
+.hero .artwrap canvas{width:100%!important;height:100%!important;}
+.chapter-writing-space{min-height:clamp(230px,32vh,390px);margin-top:clamp(32px,5vh,68px);border-left:1px solid rgba(171,196,230,.19);background:linear-gradient(90deg,rgba(126,165,210,.025),transparent 45%);}
+.arrival#garden .arrival-copy p{display:none!important;}
+.arrival#garden .garden-in-beauty .garden-caption{display:none!important;}
+.chapter-human{min-height:100svh;display:grid!important;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(20px,3vw,60px);align-items:center;padding:clamp(90px,11vh,150px) clamp(25px,7vw,115px);background:radial-gradient(ellipse at 75% 47%,#132a48 0%,#081523 45%,#060d17 100%);overflow:hidden;}
+.chapter-human-copy{position:relative;z-index:2;max-width:590px;}
+.chapter-human-copy h2{font-family:'Italiana',Georgia,serif;font-size:clamp(56px,7vw,110px);line-height:1.05;font-weight:400;letter-spacing:-.035em;margin:24px 0;color:#e6e4db;}
+.chapter-human-copy h2 em{display:block;font-family:Georgia,serif;font-weight:400;color:#b4ceff;}
+.human-art-crop{position:relative;min-height:clamp(410px,48vw,680px);width:100%;overflow:hidden;background-image:url('assets/human-connection-exact.webp');background-repeat:no-repeat;background-size:auto 100%;background-position:right center;mask-image:linear-gradient(to right,transparent,black 13%,black 90%,transparent);}
+@media(max-width:850px){.hero,.arrival#garden,.chapter-human{grid-template-columns:1fr!important;min-height:auto!important;gap:10px!important;padding:90px 6vw!important}.hero .artwrap{height:420px!important}.chapter-writing-space{min-height:210px}.chapter-human-copy h2{font-size:clamp(50px,12vw,82px)}.human-art-crop{min-height:420px;background-size:auto 100%;}}
