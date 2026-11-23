@@ -257,3 +257,57 @@
  .conclusion-stream-art{height:225px}
  .conclusion-writing-space{min-height:175px}
 }
+
+
+/* Five chapter reflection blocks — original student essay ideas, approved light edits. */
+.essential-question .essential-reflection{
+  position:absolute;bottom:clamp(44px,8svh,110px);left:50%;transform:translateX(-50%);
+  width:min(760px,calc(100% - 44px));z-index:4;
+  padding:8px clamp(14px,2.3vw,28px);
+  border-left:1px solid rgba(172,190,221,.26);
+  text-align:left;pointer-events:auto;
+}
+.chapter-writing-space,
+.conclusion-writing-space{
+  padding:clamp(12px,2vw,24px) 0 clamp(12px,2vw,22px) clamp(16px,2.3vw,28px);
+  height:auto!important;
+  min-height:unset!important;
+  overflow:visible!important;
+}
+.essential-reflection p,
+.chapter-writing-space p,
+.conclusion-writing-space p{
+  font:400 clamp(14px,1.1vw,16px)/1.82 'DM Sans',system-ui,-apple-system,sans-serif;
+  letter-spacing:.006em;
+  color:#b9c4d3;
+  margin:0 0 1.15em;
+  max-width:51ch;
+  text-wrap:pretty;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  position:static!important;
+}
+.essential-reflection p{max-width:78ch;}
+.chapter-writing-space p:last-child,
+.conclusion-writing-space p:last-child,
+.essential-reflection p:last-child{margin-bottom:0;}
+/* The old minimalist garden styles intentionally hid all paragraphs; allow approved writing only. */
+.arrival#garden .arrival-copy .chapter-writing-space p{display:block!important;}
+.conclusion-stream .conclusion-writing-space{
+  margin-top:clamp(10px,2.8vh,30px);
+  width:min(100%,820px);
+  text-align:left;
+}
+.conclusion-stream .conclusion-writing-space p{max-width:80ch;}
+@media(max-width:850px){
+  .essential-question .essential-reflection{bottom:clamp(36px,7svh,80px);}
+  .chapter-writing-space{margin-top:22px!important;}
+  .chapter-writing-space p{font-size:14px;line-height:1.72;}
+  .essential-reflection p,.conclusion-writing-space p{font-size:14px;line-height:1.78;}
+}
+@media(max-width:550px){
+  .essential-question .essential-reflection{width:calc(100% - 30px);padding-left:14px;}
+  .chapter-writing-space,.conclusion-writing-space{padding-left:17px;}
+  .chapter-writing-space p{max-width:100%;}
+}
